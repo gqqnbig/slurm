@@ -1779,13 +1779,13 @@ static void _queue_reboot_msg(void)
 		 */
 		if (!IS_NODE_REBOOT(node_ptr))
 			continue;	/* No reboot needed */
-		if (IS_NODE_COMPLETING(node_ptr)) {
-			want_nodes_reboot = true;
-			continue;
-		}
-		if (node_ptr->boot_req_time + slurm_conf.resume_timeout > now) {
+		else if (IS_NODE_REBOOT_QUEUED(node_ptr)) {
 			debug2("%s: Still waiting for boot of node %s",
 			       __func__, node_ptr->name);
+			continue; /* Request already queued */
+		}
+		if (IS_NODE_COMPLETING(node_ptr)) {
+			want_nodes_reboot = true;
 			continue;
 		}
                 /* only active idle nodes, don't reboot
@@ -1830,6 +1830,7 @@ static void _queue_reboot_msg(void)
 		 */
 		node_ptr->node_state &=  NODE_STATE_FLAGS;
 		node_ptr->node_state |=  NODE_STATE_DOWN;
+		node_ptr->node_state |= NODE_STATE_REBOOT_QUEUED;
 
 		bit_clear(avail_node_bitmap, i);
 		bit_clear(idle_node_bitmap, i);

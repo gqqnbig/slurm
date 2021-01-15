@@ -16,6 +16,8 @@ documents those changes that are of interest to users and administrators.
  -- Fix gpu allocations that request --cpus-per-task.
  -- mpi/pmix: fixed print messages for all PMIXP_* macros
  -- Add mapping for XCPU to --signal option.
+ -- Fix race condition causing node reboots to get requeued before
+    ResumeTimeout expires.
 
 * Changes in Slurm 20.11.3
 ==========================

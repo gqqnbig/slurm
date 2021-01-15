@@ -519,6 +519,9 @@ extern int load_all_node_state ( bool state_only )
 					node_ptr->node_state |= NODE_STATE_MAINT;
 				if (node_state & NODE_STATE_REBOOT)
 					node_ptr->node_state |= NODE_STATE_REBOOT;
+				if (node_state & NODE_STATE_REBOOT_QUEUED)
+					node_ptr->node_state |=
+						NODE_STATE_REBOOT_QUEUED;
 				if (node_state & NODE_STATE_POWER_UP) {
 					if (power_save_mode) {
 						node_ptr->node_state |=
@@ -1359,6 +1362,8 @@ int update_node ( update_node_msg_t * update_node_msg )
 				node_ptr->node_state &= (~NODE_STATE_DRAIN);
 				node_ptr->node_state &= (~NODE_STATE_FAIL);
 				node_ptr->node_state &= (~NODE_STATE_REBOOT);
+				node_ptr->node_state &=
+					(~NODE_STATE_REBOOT_QUEUED);
 
 				if (IS_NODE_POWERING_DOWN(node_ptr)) {
 					node_ptr->node_state &=
@@ -2683,6 +2688,7 @@ extern int validate_node_specs(slurm_msg_t *slurm_msg, bool *newly_up)
 			     (node_ptr->boot_time <
 			      node_ptr->last_response)))) {
 			node_flags &= (~NODE_STATE_REBOOT);
+			node_flags &= (~NODE_STATE_REBOOT_QUEUED);
 			if (node_ptr->next_state != NO_VAL)
 				node_flags &= (~NODE_STATE_DRAIN);
 
@@ -4093,6 +4099,7 @@ extern void check_reboot_nodes()
 			 * Remove states now so that event state shows as DOWN.
 			 */
 			node_ptr->node_state &= (~NODE_STATE_REBOOT);
+			node_ptr->node_state &= (~NODE_STATE_REBOOT_QUEUED);
 			node_ptr->node_state &= (~NODE_STATE_DRAIN);
 			node_ptr->boot_req_time = 0;
 			set_node_down_ptr(node_ptr, NULL);

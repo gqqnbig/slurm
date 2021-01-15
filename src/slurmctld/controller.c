@@ -2107,10 +2107,8 @@ static void *_slurmctld_background(void *no_data)
 			unlock_slurmctld(job_read_lock);
 		}
 
-		if (want_nodes_reboot && (now > last_reboot_msg_time)) {
+		if (want_nodes_reboot) {
 			lock_slurmctld(node_write_lock);
-			now = time(NULL);
-			last_reboot_msg_time = now;
 			_queue_reboot_msg();
 			unlock_slurmctld(node_write_lock);
 		}

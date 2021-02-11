@@ -521,6 +521,9 @@ _node_state_list (void)
 	xstrcat(all_states, node_state_string(NODE_STATE_MAINT));
 	xstrcat(all_states, ",");
 	xstrcat(all_states, node_state_string(NODE_STATE_REBOOT));
+	xstrcat(all_states, ",");
+	xstrcat(all_states,
+		node_state_string(NODE_STATE_REBOOT_ISSUED));
 
 	for (i = 0; i < strlen (all_states); i++)
 		all_states[i] = tolower (all_states[i]);
@@ -586,6 +589,8 @@ _node_state_id (char *str)
 		return NODE_STATE_MAINT;
 	if (_node_state_equal (NODE_STATE_REBOOT, str))
 		return NODE_STATE_REBOOT;
+	if (_node_state_equal (NODE_STATE_REBOOT_ISSUED, str))
+		return NODE_STATE_REBOOT_ISSUED;
 	if (_node_state_equal(NODE_STATE_CLOUD, str))
 		return NODE_STATE_CLOUD;
 

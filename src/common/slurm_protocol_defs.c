@@ -3506,10 +3506,10 @@ extern char *node_state_string(uint32_t inx)
 		if ((base == NODE_STATE_ALLOCATED) ||
 		    (base == NODE_STATE_MIXED))
 			;
-		else if (no_resp_flag)
-			return "REBOOT*";
 		else if (reboot_issued_flag)
 			return "REBOOT^";
+		else if (no_resp_flag)
+			return "REBOOT*";
 		else
 			return "REBOOT";
 	}
@@ -3725,10 +3725,10 @@ extern char *node_state_string_compact(uint32_t inx)
 	if (reboot_flag) {
 		if ((inx == NODE_STATE_ALLOCATED) || (inx == NODE_STATE_MIXED))
 			;
-		else if (no_resp_flag)
-			return "BOOT*";
 		else if (reboot_issued_flag)
 			return "BOOT^";
+		else if (no_resp_flag)
+			return "BOOT*";
 		else
 			return "BOOT";
 	}

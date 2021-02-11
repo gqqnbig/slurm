@@ -1779,7 +1779,7 @@ static void _queue_reboot_msg(void)
 		 */
 		if (!IS_NODE_REBOOT(node_ptr))
 			continue;	/* No reboot needed */
-		else if (IS_NODE_REBOOT_QUEUED(node_ptr)) {
+		else if (IS_NODE_REBOOT_ISSUED(node_ptr)) {
 			debug2("%s: Still waiting for boot of node %s",
 			       __func__, node_ptr->name);
 			continue; /* Request already queued */
@@ -1830,7 +1830,7 @@ static void _queue_reboot_msg(void)
 		 */
 		node_ptr->node_state &=  NODE_STATE_FLAGS;
 		node_ptr->node_state |=  NODE_STATE_DOWN;
-		node_ptr->node_state |= NODE_STATE_REBOOT_QUEUED;
+		node_ptr->node_state |= NODE_STATE_REBOOT_ISSUED;
 
 		bit_clear(avail_node_bitmap, i);
 		bit_clear(idle_node_bitmap, i);

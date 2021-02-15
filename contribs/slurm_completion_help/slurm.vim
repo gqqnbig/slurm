@@ -71,70 +71,109 @@ endif
 syn region	shSlurmComment start="^#SBATCH" end="\n" oneline contains=shSlurmKeyword,shSlurmOption,shSlurmValue
 " all shSlurmString are suspect; they probably could be narrowed down to more
 " specific regular expressions. Typical example is --mail-type or --begin
-syn match 	shSlurmKeyword 	contained	'#SBATCH\s*'
+syn match	shSlurmKeyword 	contained	'#SBATCH\s*'
 syn match	shSlurmOption	contained	'--account=' nextgroup=shSlurmString
 syn match	shSlurmOption	contained	'--acctg-freq=' nextgroup=shSlurmNumber
+syn match	shSlurmOption	contained	'--array' nextgroup=shSlurmString
+syn match	shSlurmOption	contained	'--batch' nextgroup=shSlurmString
+syn match	shSlurmOption	contained	'--bb' nextgroup=shSlurmString
+syn match	shSlurmOption	contained	'--bbf' nextgroup=shSlurmString
 syn match	shSlurmOption	contained	'--begin=' nextgroup=shSlurmString
+syn match	shSlurmOption	contained	'--chdir=' nextgroup=shSlurmString
+syn match	shSlurmOption	contained	'--cluster-constraint=' nextgroup=shSlurmString
+syn match	shSlurmOption	contained	'--clusters=' nextgroup=shSlurmString
 syn match	shSlurmOption	contained	'--comment=' nextgroup=shSlurmIdentifier
 syn match	shSlurmOption	contained	'--constraint=' nextgroup=shSlurmString
 syn match	shSlurmOption	contained	'--contiguous'
+syn match	shSlurmOption	contained	'--core-spec=' nextgroup=shSlurmNumber
 syn match	shSlurmOption	contained	'--cores-per-socket=' nextgroup=shSlurmNumber
-syn match	shSlurmOption	contained	'--cpu-bind==' nextgroup=shSlurmString
+syn match	shSlurmOption	contained	'--cpu-freq=' nextgroup=shSlurmString
+syn match	shSlurmOption	contained	'--cpus-per-gpu=' nextgroup=shSlurmString
 syn match	shSlurmOption	contained	'--cpus-per-task=' nextgroup=shSlurmNumber
+syn match	shSlurmOption	contained	'--deadline=' nextgroup=shSlurmString
+syn match	shSlurmOption	contained	'--delay-boot=' nextgroup=shSlurmString
 syn match	shSlurmOption	contained	'--dependency=' nextgroup=shSlurmString
 syn match	shSlurmOption	contained	'--distribution=' nextgroup=shSlurmDist
 syn match	shSlurmOption	contained	'--error=' nextgroup=shSlurmString
 syn match	shSlurmOption	contained	'--exclude=' nextgroup=shSlurmString
-syn match	shSlurmOption	contained	'--exclusive'
+syn match	shSlurmOption	contained	'--exclusive=' nextgroup=shSlurmString
+syn match	shSlurmOption	contained	'--export=' nextgroup=shSlurmString
+syn match	shSlurmOption	contained	'--export-file=' nextgroup=shSlurmString
 syn match	shSlurmOption	contained	'--extra-node-info=' nextgroup=shSlurmNodeInfo
 syn match	shSlurmOption	contained	'--get-user-env'
 syn match	shSlurmOption	contained	'--get-user-env=' nextgroup=shSlurmEnv
 syn match	shSlurmOption	contained	'--gid=' nextgroup=shSlurmString
+syn match	shSlurmOption	contained	'--gpu-bind=' nextgroup=shSlurmString
+syn match	shSlurmOption	contained	'--gpu-freq=' nextgroup=shSlurmString
+syn match	shSlurmOption	contained	'--gpus=' nextgroup=shSlurmString
+syn match	shSlurmOption	contained	'--gpus-per-node=' nextgroup=shSlurmString
+syn match	shSlurmOption	contained	'--gpus-per-socket=' nextgroup=shSlurmString
+syn match	shSlurmOption	contained	'--gpus-per-task=' nextgroup=shSlurmString
+syn match	shSlurmOption	contained	'--gres=' nextgroup=shSlurmString
+syn match	shSlurmOption	contained	'--gres-flags=' nextgroup=shSlurmString
+syn match	shSlurmOption	contained	'--help'
 syn match	shSlurmOption	contained	'--hint=' nextgroup=shSlurmHint
-syn match	shSlurmOption	contained	'--immediate' nextgroup=shSlurmNumber
+syn match	shSlurmOption	contained	'--ignore-pbs'
 syn match	shSlurmOption	contained	'--input=' nextgroup=shSlurmString
-syn match	shSlurmOption	contained	'--job-id=' nextgroup=shSlurmNumber
 syn match	shSlurmOption	contained	'--job-name=' nextgroup=shSlurmString
-syn match	shSlurmOption	contained	'--licences=' nextgroup=shSlurmString
+syn match	shSlurmOption	contained	'--kill-on-invalid-dep=' nextgroup=shSlurmString
+syn match	shSlurmOption	contained	'--licenses=' nextgroup=shSlurmString
 syn match	shSlurmOption	contained	'--mail-type=' nextgroup=shSlurmString
 syn match	shSlurmOption	contained	'--mail-user=' nextgroup=shSlurmEmail
+syn match	shSlurmOption	contained	'--mcs-label=' nextgroup=shSlurmString
 syn match	shSlurmOption	contained	'--mem-bind=' nextgroup=shSlurmNumber
 syn match	shSlurmOption	contained	'--mem-per-cpu=' nextgroup=shSlurmNumber
+syn match	shSlurmOption	contained	'--mem-per-gpu=' nextgroup=shSlurmString
 syn match	shSlurmOption	contained	'--mem=' nextgroup=shSlurmNumber
-syn match	shSlurmOption	contained	'--mincores=' nextgroup=shSlurmNumber
 syn match	shSlurmOption	contained	'--mincpus=' nextgroup=shSlurmNumber
-syn match	shSlurmOption	contained	'--minsockets=' nextgroup=shSlurmNumber
-syn match	shSlurmOption	contained	'--minthreads=' nextgroup=shSlurmNumber
 syn match	shSlurmOption	contained	'--network=' nextgroup=shSlurmString
 syn match	shSlurmOption	contained	'--nice'
 syn match	shSlurmOption	contained	'--nice=' nextgroup=shSlurmNumber
 syn match	shSlurmOption	contained	'--no-kill'
+syn match	shSlurmOption	contained	'--no-kill=' nextgroup=shSlurmString
 syn match	shSlurmOption	contained	'--no-requeue'
 syn match	shSlurmOption	contained	'--nodefile=' nextgroup=shSlurmString
 syn match	shSlurmOption	contained	'--nodelist=' nextgroup=shSlurmString
 syn match	shSlurmOption	contained	'--nodes=' nextgroup=shSlurmInterval
 syn match	shSlurmOption	contained	'--ntasks-per-core=' nextgroup=shSlurmNumber
+syn match	shSlurmOption	contained	'--ntasks-per-gpu=' nextgroup=shSlurmString
 syn match	shSlurmOption	contained	'--ntasks-per-node=' nextgroup=shSlurmNumber
 syn match	shSlurmOption	contained	'--ntasks-per-socket=' nextgroup=shSlurmNumber
 syn match	shSlurmOption	contained	'--ntasks=' nextgroup=shSlurmNumber
 syn match	shSlurmOption	contained	'--open-mode=' nextgroup=shSlurmMode
 syn match	shSlurmOption	contained	'--output=' nextgroup=shSlurmString
 syn match	shSlurmOption	contained	'--overcommit'
+syn match	shSlurmOption	contained	'--oversubscribe'
+syn match	shSlurmOption	contained	'--parsable'
 syn match	shSlurmOption	contained	'--partition=' nextgroup=shSlurmString
+syn match	shSlurmOption	contained	'--power=' nextgroup=shSlurmString
+syn match	shSlurmOption	contained	'--priority=' nextgroup=shSlurmString
+syn match	shSlurmOption	contained	'--profile=' nextgroup=shSlurmString
 syn match	shSlurmOption	contained	'--propagate'
 syn match	shSlurmOption	contained	'--propagate=' nextgroup=shSlurmPropag
+syn match	shSlurmOption	contained	'--qos=' nextgroup=shSlurmString
 syn match	shSlurmOption	contained	'--quiet'
+syn match	shSlurmOption	contained	'--reboot'
 syn match	shSlurmOption	contained	'--requeue'
 syn match	shSlurmOption	contained	'--reservation=' nextgroup=shSlurmString
-syn match	shSlurmOption	contained	'--share'
 syn match	shSlurmOption	contained	'--signal=' nextgroup=shSlurmString
 syn match	shSlurmOption	contained	'--socket-per-node=' nextgroup=shSlurmNumber
+syn match	shSlurmOption	contained	'--spread-job'
+syn match	shSlurmOption	contained	'--switches=' nextgroup=shSlurmString
+syn match	shSlurmOption	contained	'--test-only'
+syn match	shSlurmOption	contained	'--thread-spec=' nextgroup=shSlurmNumber
 syn match	shSlurmOption	contained	'--threads-per-core=' nextgroup=shSlurmNumber
 syn match	shSlurmOption	contained	'--time=' nextgroup=shSlurmDuration
+syn match	shSlurmOption	contained	'--time-min' nextgroup=shSlurmDuration
 syn match	shSlurmOption	contained	'--tmp=' nextgroup=shSlurmString
 syn match	shSlurmOption	contained	'--uid=' nextgroup=shSlurmString
+syn match	shSlurmOption	contained	'--usage'
+syn match	shSlurmOption	contained	'--use-min-nodes'
+syn match	shSlurmOption	contained	'--verbose'
+syn match	shSlurmOption	contained	'--version'
+syn match	shSlurmOption	contained	'--wait'
+syn match	shSlurmOption	contained	'--wait-all-nodes=' nextgroup=shSlurmString
 syn match	shSlurmOption	contained	'--wckey=' nextgroup=shSlurmString
-syn match	shSlurmOption	contained	'--workdir=' nextgroup=shSlurmString
 syn match	shSlurmOption	contained	'--wrap=' nextgroup=shSlurmString
 syn region	shSlurmValue start="=" end="$" contains=shSlurmNoshSlurmEnvdeInfo,shSlurmString,shSlurmMailType,shSlurmIdentifier,shSlurmEnv,shSlurmHint,shSlurmMode,shSlurmPropag,shSlurmInterval,shSlurmDist,shSlurmEmail
 syn match 	shSlurmNumber	contained	'\d\d*'
